@@ -1,0 +1,242 @@
+<viewMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="../../schema/ViewMap.xsd" >
+  <test id="hideToDate"              exp="(svdItemDateEfctvTo == '' || svdItemDateEfctvTo != '') &amp;&amp; mode == 'add' ? 'rx' : 'rw'"/>
+  <test id="hideIsAsetItem"           exp="svbIsAsetItem == 1 &amp;&amp; svbIsPchsItem == 1 ? 'rw':'rx'"/>  
+  <test id="hideIsPchsItem"           exp="svbIsPchsItem != 1 ? 'rx' : 'rw'"/> 
+  <test id="hidesvbIsInvItem"         exp="svbIsInvItem == '0' ? 'rx' : 'ro'"/>  
+  <test id="hidesvbIsXpnsItem"        exp="svbIsXpnsItem == '0' ? 'rx' : 'ro'"/>  
+  <test id="hidesvbIsItcAplcbl"       exp="svbIsItcAplcbl == '0' ? 'rx': 'ro'"/> 
+  <test id="hidesvbIsAsetItem"        exp="svbIsAsetItem == '0' ? 'rx' : 'ro'"/>  
+  <test id="hidesvsAsetBookNaturDesc" exp="svsAsetBookNaturDesc == '' ? 'rx' : 'ro'"/>   
+  <test id="hidesvsAsetTaxCtgryId"    exp="svsAsetTaxCtgryId == '' ? 'rx' : 'ro'"/> 
+  <test id="hidesvsAsetActCtgryId"    exp="svsAsetActCtgryId == '' ? 'rx' : 'ro'"/>   
+  <test id="hideToDateView"           exp="svdItemDateEfctvTo == '31-Dec-2078' ? 'rx' : 'ro'"/> 
+  <test id="hideToDateItemNty"        exp="(svdBizNtyItemAcessTo == '' || svdBizNtyItemAcessTo != '') &amp;&amp; mode == 'add' ? 'rx' : 'rw'"/>
+  <view id="default" bodyClass="bgWhite h100 ofyAuto">
+         <layout class="w100 flexRow">
+          <button id="svoAdd"           lock="ro" lable="Add"    class="btn-primary m2"     fa5="fas fa-plus"/>
+          <button id="svoEdit"          lock="ro" lable="Edit"   class="btn-primary m2"     fa5="fas fa-edit"/> 
+          <buttonGroup id="svoItemExclGrp" lable="Excel Options" fs5="" class="" >
+            <button   id="svoUpldXcel"         lock="rw" lable="Upload New Item Excel"             class="w100 btn-light mb1" fa5="fas fa-file-upload" /> 
+            <button   id="svoDwnldXcel"        lock="rw" lable="Download New Item Template"        class="w100 btn-light mb1" fa5="fas fa-file-download" /> 
+            <!--<button   id="svoItemNtyUpldXcel"  lock="rw" lable="Upload New Item Entity Excel"      class="w100 btn-light mb1" fa5="fas fa-file-upload" /> 
+            <button   id="svoItemNtyDwnldXcel" lock="rw" lable="Download New Item Entity Template" class="w100 btn-light mb1" fa5="fas fa-file-download" /> -->
+          </buttonGroup>
+         </layout>
+        <collection id="svoItem">
+          <collectionHead class="w100 flexRow bgPrimary white">
+            <lable id="svsL1"   class="w10 textOverflowDoted"            tooltip="Item Identity"                    staticValue="Id"/>
+            <lable id="svsL2"   class="w25 textOverflowDoted"            tooltip="Item Description"                 staticValue="Item Description"/> 
+            <lable id="svsL3"   class="w15 textOverflowDoted"            tooltip="Item Unit of Mesurement Identity" staticValue="Unit Of Measurement"/>
+            <lable id="svsL6"   class="w5  textCenter textOverflowDoted" tooltip="Is Sale Item?"                    staticValue="Sell?"/> 
+            <lable id="svsL7"   class="w10 textCenter textOverflowDoted" tooltip="Is Purchase Item?"                staticValue="Purchase?"/> 
+            <lable id="svsL10"  class="w10 textCenter textOverflowDoted" tooltip="Is Asset Item?"                   staticValue="Asset Item?"/>
+            <lable id="svsL14"  class="w10 textCenter textOverflowDoted" tooltip="Is Inventory Item?"               staticValue="Inventory?"/>
+            <lable id="svsL15"  class="w10 textCenter textOverflowDoted" tooltip="Is Expenses Item?"                staticValue="Expenses?"/> 
+            <lable id="svsL4"   class="w10 textOverflowDoted"            tooltip="Item Date Effective From"         staticValue="From"/> 
+            <lable id="svsL5"   class="w10 textOverflowDoted"            tooltip="Item Date Effective To"           staticValue="To"/>
+            <lable id="svsL16"  class="w10 textOverflowDoted"            tooltip="Revison"                          staticValue="Revision"/>
+
+          </collectionHead>
+          <controlGroup pk="sviItemD" class="w100 flexRow alt" >
+            <layout id="svoLayout1" class="w100 flexRow" >
+              <text     id="svsItemIdy"           tooltip="svsItemIdy"           lock="ro"     class="w10 textOverflowDoted" lableClass="hidden" inputClass="w100"/>
+              <text     id="svsItemDesc"          tooltip="svsItemDesc"          lock="ro"     class="w25 textOverflowDoted link" lableClass="hidden" inputClass="w100" />
+              <text     id="svsItemUomDesc"       tooltip="svsItemUomDesc"        lock="ro"     class="w15 textOverflowDoted" lableClass="hidden" inputClass="w100"/>
+              <checkbox id="svbIsSellItem"        tooltip="svbIsSellItem"        lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <checkbox id="svbIsPchsItem"        tooltip="svbIsPchsItem"        lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <checkbox id="svbIsAsetItem"        tooltip="svbIsAsetItem"        lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <checkbox id="svbIsInvItem"         tooltip="svbIsInvItem"         lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <checkbox id="svbIsXpnsItem"        tooltip="svbIsXpnsItem"        lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <date     id="svdItemDateEfctvFrom" tooltip="svdItemDateEfctvFrom" lock="ro"     class="w10 textOverflowDoted" lableClass="hidden" inputClass="w100"/> 
+              <date     id="svdItemDateEfctvTo"   tooltip="svdItemDateEfctvTo"   lock="ro"     class="w10 textOverflowDoted" lableClass="hidden" inputClass="w100"/>
+              <text     id="sviItemF"             tooltip="sviItemF"             lock="ro"     class="w10 textOverflowDoted link" lableClass="hidden" inputClass="w100"/> 
+          </layout>
+          </controlGroup>
+        </collection>
+  </view>
+  
+  <view id="viewItem" bodyClass="w100 bgWhite h100 ofyAuto">
+         <layout class="w100 flexRow mxAuto justifyContentBetween">
+          <button id="svoViewBack"       lock="ro" lable="Back"    class="btn-danger-light m2"     fa5="fas fa-arrow-circle-left"/>
+          <title  id="svsTitle"          staticValue="Item Details" class="mxAuto"/> 
+         </layout>
+        <collection id="svoItem" bulkPost="1">
+          <controlGroup pk="sviItemD" class="w100 flexRowWrap mxAuto p3" >
+            <layout id="svoLayout3" class="w100 flexRowWrap mxAuto box-pri m2 p3" >
+              <text        id="svsItemIdyRvsed"      lock="ro"     class="w33 colCntrl"    lable="Id"                           lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder" />
+              <textarea    id="svsItemDesc"          lock="ro"     class="w33 colCntrl"    lable="Description"                  lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder" />
+              <dropdown    id="svsItemUomDesc"       lock="ro"     class="w33 colCntrl"    lable="Unit Of Measurement"          lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsUom"        keys="svsItemUomId,svsItemUomDesc" output="svsItemUomDesc"/>
+              <text        id="svsItemHsnSac"        lock="ro"     class="w33 colCntrl"    lable="HSN"                          lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/>
+              <date        id="svdItemDateEfctvFrom" lock="ro"     class="w33 colCntrl"    lable="From"                         lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/> 
+              <date        id="svdItemDateEfctvTo"   lock="test(hideToDateView)"     class="w33 colCntrl"    lable="To"                           lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/>
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsSellItem"        lock="ro"     class="w33"    lable="Sale Item"           lableClass="w30"            inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+              <checkbox    id="svbIsPchsItem"        lock="ro"     class="w33"    lable="Purchase Item"       lableClass="w30"            inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout> 
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsInvItem"         lock="test(hidesvbIsInvItem)"     class="w33"    lable="Inventory Item"    lableClass="w30"  inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+              <checkbox    id="svbIsXpnsItem"        lock="test(hidesvbIsXpnsItem)"     class="w33"    lable="Expense Item"      lableClass="w30"  inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout>
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsItcAplcbl"       lock="test(hidesvbIsItcAplcbl)"     class="w33"    lable="Input Tax Credit Applicable"  lableClass="w40"   inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <checkbox    id="svbIsAsetItem"        lock="test(hidesvbIsAsetItem)"     class="w33"    lable="Asset Item"                   lableClass="w30"    inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout>
+              <dropdown    id="svsAsetBookNaturDesc" lock="test(hidesvsAsetBookNaturDesc)"     class="w33 colCntrl"    lable="Asset Book Nature"            lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsAsetBookNatur"   keys="svsAsetBookNaturId" output="svsAsetBookNaturDesc"/>
+              <dropdown    id="svsAsetTaxCtgryId"    lock="test(hidesvsAsetTaxCtgryId)"     class="w33 colCntrl"    lable="Tax Category"                 lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsTaxCtgry"        keys="svsAsetTaxCtgryId,sviAsetTaxCtgryD" output="svsAsetTaxCtgryId"/>
+              <dropdown    id="svsAsetActCtgryId"    lock="test(hidesvsAsetActCtgryId)"     class="w33 colCntrl"    lable="Act Category"                 lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsActCtgry"        keys="svsAsetActCtgryId,sviAsetActCtgryD" output="svsAsetActCtgryId"/>
+              </layout>
+          </controlGroup>
+        </collection> 
+        <collection id="svoNtyMstrMpng" bulkPost="1">
+           <collectionHead class="w25 flexRow red">
+              <lable id="svsL25"   class="w100 textOverflowDoted f700 m2"            tooltip="Applicable To"                    staticValue="Applicable To"/>
+           </collectionHead>
+           <controlGroup pk="svsBizNtyIdy" class="w100 flexColWrap mxAuto box-pri" >
+            <layout id="svoLayout5" class="w100 h100 flexColWrap mxAuto  m2 p2" >
+              <layout id="svoLayout6" class="w100 flexRow">
+                 <text     id="svsBizNtyIdy"             tooltip="svsBizNtyIdy"           lock="ro"     class="w10"   inputClass="w15 inputLineBorder" /> 
+                 <text     id="sviBizNtyD"               tooltip="sviBizNtyD"             lock="ro"     class="w5"    inputClass="hidden"/>
+                 <checkbox id="svsBizNtyItemAcess"       tooltip="svsBizNtyItemAcess"     lock="ro"     class="w5"    lableClass="hidden"  inputClass="w100 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+                 <date     id="svdBizNtyItemAcessFrom"   tooltip="svdBizNtyItemAcessFrom" lock="ro"     class="w35"   lable="From"         lableClass="w60" inputClass="w100 inputLineBorder" />
+                 <date     id="svdBizNtyItemAcessTo"     tooltip="svdBizNtyItemAcessTo"   lock="test(hideToDateView)"     class="w35"   lable="To"           lableClass="w60" inputClass="w100 inputLineBorder" sensitiveRangeFrom="svdBizNtyItemAcessFrom"/>
+              </layout>  
+               
+            </layout>
+          </controlGroup>
+        </collection>
+  </view>
+  
+  <view id="addeditItem" bodyClass="w100 bgWhite h100 ofyAuto">
+         <layout class="w100 flexRow mxAuto justifyContentBetween">
+          <button id="svoEditAddBack"           lock="ro" lable="Back"    class="btn-danger-light m2"     fa5="fas fa-arrow-circle-left"/>
+          <title  id="svsTitle"          staticValue="Item Details" /> 
+          <button id="svoSave"           lock="ro" lable="Save"    class="btn-primary m2"          fa5="fas fa-save"/> 
+         </layout>
+        <collection id="svoItem" bulkPost="1">
+          <controlGroup pk="sviItemD" class="w100 flexRowWrap mxAuto p3" >
+            <layout id="svoLayout3" class="w100 flexRowWrap mxAuto box-pri m2 p3" > 
+              <text        id="svsItemOperation"     lock="rw"     class="hidden"          lable="Operation (I/U)"              lableClass="hidden"     mandatory="1"             inputClass="hidden" />
+              <text        id="svsItemIdyRvsed"      lock="rw"     class="w33 colCntrl"    lable="Id"                           lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder" />
+              <textarea    id="svsItemDesc"          lock="rw"     class="w33 colCntrl"    lable="Description"                  lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder" />
+              <dropdown    id="svsItemUomDesc"       lock="rw"     class="w33 colCntrl"    lable="Unit Of Measurement"          lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsUom"        keys="svsItemUomId,svsItemUomDesc" output="svsItemUomDesc"/>
+              <text        id="svsItemHsnSac"        lock="rw"     class="w33 colCntrl"    lable="HSN"                          lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/>
+              <date        id="svdItemDateEfctvFrom" lock="rw"     class="w33 colCntrl"    lable="From"                         lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/> 
+              <date        id="svdItemDateEfctvTo"   lock="test(hideToDate)"     class="w33 colCntrl"    lable="To"                           lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"/>
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsSellItem"        lock="rw"     class="w33"    lable="Sale Item"           lableClass="w30"            inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+              <checkbox    id="svbIsPchsItem"        lock="rw"     class="w33"    lable="Purchase Item"       lableClass="w30"            inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout> 
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsInvItem"         lock="test(hideIsPchsItem)"     class="w33"    lable="Inventory Item"    lableClass="w30"  inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+              <checkbox    id="svbIsXpnsItem"        lock="test(hideIsPchsItem)"     class="w33"    lable="Expense Item"      lableClass="w30"  inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout>
+              <layout class="w100 flexRow m1">
+              <checkbox    id="svbIsItcAplcbl"       lock="test(hideIsPchsItem)"     class="w33"    lable="Input Tax Credit Applicable"  lableClass="w40"   inputClass="w40 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <checkbox    id="svbIsAsetItem"        lock="test(hideIsPchsItem)"     class="w33"    lable="Asset Item"                   lableClass="w30"    inputClass="w40 inputLineBorder" mandatory="0" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              </layout>
+              <dropdown    id="svsAsetBookNaturDesc" lock="test(hideIsAsetItem)"     class="w33 colCntrl"    lable="Asset Book Nature"            lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsAsetBookNatur"   keys="svsAsetBookNaturId" output="svsAsetBookNaturDesc"/>
+              <dropdown    id="svsAsetTaxCtgryId"    lock="test(hideIsAsetItem)"     class="w33 colCntrl"    lable="Tax Category"                 lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsTaxCtgry"        keys="svsAsetTaxCtgryId,sviAsetTaxCtgryD" output="svsAsetTaxCtgryId"/>
+              <dropdown    id="svsAsetActCtgryId"    lock="test(hideIsAsetItem)"     class="w33 colCntrl"    lable="Act Category"                 lableClass="w80"        mandatory="1"             inputClass="w80 inputLineBorder"      datasource="svoDsActCtgry"        keys="svsAsetActCtgryId,sviAsetActCtgryD" output="svsAsetActCtgryId"/>
+              </layout>
+          </controlGroup>
+        </collection> 
+        <collection id="svoNtyMstrMpng" bulkPost="1">
+           <collectionHead class="w25 flexRow red">
+              <lable id="svsL25"   class="w100 textOverflowDoted f700 m2"            tooltip="Applicable To"                    staticValue="Applicable To"/>
+           </collectionHead>
+           <controlGroup pk="svsBizNtyIdy" class="w100 flexColWrap mxAuto box-pri" >
+            <layout id="svoLayout5" class="w100 h100 flexColWrap mxAuto  m2 p2" >
+              <layout id="svoLayout6" class="w100 flexRow"> 
+                 <text     id="svsItemNtyOpeartion"      lock="rw"     class="hidden"          lable="Operation (I/U)"              lableClass="hidden"     mandatory="1"             inputClass="hidden" />
+                 <text     id="svsBizNtyIdy"             tooltip="svsBizNtyIdy"           lock="ro"     class="w10"   inputClass="w15 inputLineBorder" /> 
+                 <text     id="sviBizNtyD"               tooltip="sviBizNtyD"             lock="ro"     class="w5"    inputClass="hidden"/>
+                 <checkbox id="svsBizNtyItemAcess"       tooltip="svsBizNtyItemAcess"     lock="rw"     class="w5"    lableClass="hidden"  inputClass="w100 inputLineBorder" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red" />
+                 <date     id="svdBizNtyItemAcessFrom"   tooltip="svdBizNtyItemAcessFrom" lock="rw"     class="w35"   lable="From"         lableClass="w60" inputClass="w100 inputLineBorder" />
+                 <date     id="svdBizNtyItemAcessTo"     tooltip="svdBizNtyItemAcessTo"   lock="test(hideToDateItemNty)"     class="w35"   lable="To"           lableClass="w60" inputClass="w100 inputLineBorder" sensitiveRangeFrom="svdBizNtyItemAcessFrom"/>
+              </layout>  
+               
+            </layout>
+          </controlGroup>
+        </collection>
+  </view>
+  
+  <view id="viewItemRevs" bodyClass="bgWhite h100 ofyAuto">
+         <layout class="w100 flexRow">
+          <button id="svoBackItemRevs"           lock="ro" lable="Back"    class="btn-danger-light m2"     fa5="fas fa-arrow-circle-left"/>
+         </layout>
+        <collection id="svoItem">
+          <collectionHead class="w100 flexRow bgPrimary white">
+           <lable id="svsL9"  class="w10 textOverflowDoted"           tooltip="Id" staticValue="Id"/>
+          <lable id="svsL10"  class="w15 textOverflowDoted"           tooltip="Item Description" staticValue="Item Description"/>
+          <lable id="svsL11"  class="w10 textOverflowDoted"           tooltip="Unit Of Measurement Idy" staticValue="Unit Of Measurement Idy"/>
+          <lable id="svsL14"  class="w5 textOverflowDoted"            tooltip="Sale?" staticValue="Sale?"/>
+          <lable id="svsL15"  class="w5 textOverflowDoted"            tooltip="Purchase?" staticValue="Purchase?"/>
+          <lable id="svsL16"  class="w5 textOverflowDoted"            tooltip="Input Credit Tax Applicable" staticValue="Input Credit Tax Applicable"/>
+          <lable id="svsL17"  class="w10 textOverflowDoted"           tooltip="HSN" staticValue="HSN"/>
+          <lable id="svsL18"  class="w5 textOverflowDoted"            tooltip="Asset Item?" staticValue="Asset Item?"/> 
+          <lable id="svsL19"  class="w10 textOverflowDoted"           tooltip="Asset Book Nature" staticValue="Asset Book Nature"/>
+          <lable id="svsL20"  class="w10 textOverflowDoted"           tooltip="Tax Category"      staticValue="Tax Category"/>
+          <lable id="svsL21"  class="w10 textOverflowDoted"           tooltip="Act Category"  staticValue="Act Category"/> 
+          <lable id="svsL14"  class="w5 textCenter textOverflowDoted" tooltip="Inventory?"    staticValue="Inventory?"/>
+          <lable id="svsL15"  class="w5 textCenter textOverflowDoted" tooltip="Expenses?"     staticValue="Expenses?"/> 
+          <lable id="svsL12"  class="w10 textOverflowDoted"           tooltip="From"          staticValue="From"/>
+          <lable id="svsL13"  class="w10 textOverflowDoted"           tooltip="To"            staticValue="To"/>
+          <lable id="svsL22"  class="w10 textOverflowDoted"           tooltip="At What Time?" staticValue="At What Time?"/> 
+          <lable id="svsL23"  class="w10 textOverflowDoted"           tooltip="By Whom?"      staticValue="By Whom?"/>
+          <lable id="svsL24"  class="w5 textOverflowDoted"            tooltip="Revision"      staticValue="Revision"/> 
+          </collectionHead>
+          <controlGroup pk="sviItemD" class="w100 flexRow" >
+            <layout id="svoLayout1" class="w100 flexRow" >
+              <text      id="svsItemIdy"           tooltip="svsItemIdy"           lock="ro"     class="w10 textOverflowDoted"            lableClass="hidden" inputClass="w100"/>
+              <text      id="svsItemDesc"          tooltip="svsItemDesc"          lock="ro"     class="w15 textOverflowDoted"            lableClass="hidden" inputClass="w100" />
+              <text      id="svsItemUomDesc"       tooltip="svsItemUomIdy"        lock="ro"     class="w10 textOverflowDoted"            lableClass="hidden" inputClass="w100"/>
+              <checkbox  id="svbIsSellItem"        tooltip="svbIsSellItem"        lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <checkbox  id="svbIsPchsItem"        tooltip="svbIsPchsItem"        lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <checkbox id="svbIsItcAplcbl"       tooltip="svbIsItcAplcbl"       lock="ro"     class="w5  textOverflowDoted"            lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <text      id="svsItemHsnSac"        tooltip="svsItemHsnSac"          lock="ro"     class="w10 textOverflowDoted"            lableClass="hidden" inputClass="w100" />
+              <checkbox  id="svbIsAsetItem"        tooltip="svbIsAsetItem"        lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <dropdown  id="svsAsetBookNaturDesc" tooltip="svsAsetBookNaturDesc" lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" datasource="svoDsTaxCtgry" keys="svsAsetTaxCtgryId,sviAsetTaxCtgryD" output="svsAsetTaxCtgryId"/>
+              <dropdown  id="svsAsetTaxCtgryId"    tooltip="svsAsetTaxCtgryId"    lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" datasource="svoDsTaxCtgry" keys="svsAsetTaxCtgryId,sviAsetTaxCtgryD" output="svsAsetTaxCtgryId"/>
+              <dropdown  id="svsAsetActCtgryId"    tooltip="svsAsetActCtgryId"    lock="ro"     class="w10 textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" datasource="svoDsActCtgry" keys="svsAsetActCtgryId,sviAsetActCtgryD" output="svsAsetActCtgryId"/>
+              <checkbox  id="svbIsInvItem"         tooltip="svbIsInvItem"         lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/>
+              <checkbox  id="svbIsXpnsItem"        tooltip="svbIsXpnsItem"        lock="ro"     class="w5  textCenter textOverflowDoted" lableClass="hidden" inputClass="w100" state="bi" clips="fas fa-check-circle green,fas fa-times-circle red"/> 
+              <date      id="svdItemDateEfctvFrom" tooltip="svdItemDateEfctvFrom" lock="ro"     class="w10 textOverflowDoted"            lableClass="hidden" inputClass="w100"/> 
+              <date      id="svdItemDateEfctvTo"   tooltip="svdItemDateEfctvTo"   lock="ro"     class="w10 textOverflowDoted"            lableClass="hidden" inputClass="w100"/>
+              <text      id="svtItemA"             tooltip="svtItemA"             lock="ro"     class="w10 p1 textOverflowDoted"         lableClass="hidden" inputClass="w100"/>
+              <text      id="sviItemB"             tooltip="sviItemB"             lock="ro"     class="w10 p1 textOverflowDoted"         lableClass="hidden" inputClass="w100"/>
+              <text      id="sviItemF"             tooltip="sviItemF"             lock="ro"     class="w5 textOverflowDoted"             lableClass="hidden" inputClass="w100"/> 
+          </layout>
+          </controlGroup>
+        </collection>
+  </view>
+  
+   <view id="UpldNewXcel" bodyClass="w50 mW70 sW100 hAuto bgWhite" > 
+    <layout class="w100 mxAuto flexCol p3" > 
+      <title id="svoT1" staticValue="Upload New Item Excel" class="pl5" />
+      <layout id="svoNewFileHolder" class="w100 justifyContentBetween p5 " >
+      </layout>
+      <layout class="w100 flexRow pl5" > 
+        <button id="svoUpldXcelBack" lock="ro" lable="Back"   class="btn-danger mr2" fa5="fas fa-arrow-circle-left" /> 
+        <button id="svoUpldAndPrviw" lock="ro" lable="Upload" class="btn-primary ml2" fa5="fas fa-file-download" /> 
+      </layout>
+    </layout> 
+  </view> 
+  
+   <!--<view id="UpldNewItemNtyXcel" bodyClass="w50 mW70 sW100 hAuto bgWhite" > 
+    <layout class="w100 mxAuto flexCol p3" > 
+      <title id="svoT1" staticValue="Upload New Item Entity Excel" class="pl5" />
+      <layout id="svoNewItemNtyFileHolder" class="w100 justifyContentBetween p5 " >
+      </layout>
+      <layout class="w100 flexRow pl5" > 
+        <button id="svoUpldXcelBack" lock="ro" lable="Back"   class="btn-danger mr2"  fa5="fas fa-arrow-circle-left" /> 
+        <button id="svoUpldAndPrviw" lock="ro" lable="Upload" class="btn-primary ml2" fa5="fas fa-file-download" /> 
+      </layout>
+    </layout> 
+  </view> -->
+  
+  <datasource id="svoDsUom"            display="svsItemUomDesc"       searchOn="svsItemUomDesc"/>
+  <datasource id="svoDsTaxCtgry"       display="svsAsetTaxCtgryId"    searchOn="svsAsetTaxCtgryId"/>
+  <datasource id="svoDsActCtgry"       display="svsAsetActCtgryId"    searchOn="svsAsetActCtgryId"/>
+  <datasource id="svoDsAsetBookNatur"  display="svsAsetBookNaturDesc" searchOn="svsAsetBookNaturDesc"/>
+  <script src="/modules/Item/Item.js" /> 
+</viewMap>
